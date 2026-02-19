@@ -1,5 +1,25 @@
+# data
 data/
-logs/
-notebooks/
+*.csv
+*.xlsx
+*.json
+*.jsonl
+*.txt
 
+# embeddings
+embeddings/
+
+# logs
+logs/
+*.log
+
+# notebooks
+notebooks/
+*.ipynb_checkpoints
+
+# pycache
+__pycache__/
+*.pyc
+
+# environment variables
 .env
