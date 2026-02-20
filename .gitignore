@@ -1,5 +1,6 @@
 # data
 data/
+experiments/
 *.csv
 *.xlsx
 *.json
@@ -8,6 +9,7 @@ data/
 
 # embeddings
 embeddings/
+*.npy
 
 # logs
 logs/
