@@ -3,7 +3,6 @@ import json
 import numpy as np
 import pandas as pd
 from collections import Counter
-import random
 import matplotlib.pyplot as plt
 from PIL import Image
 
