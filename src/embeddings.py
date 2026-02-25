@@ -30,7 +30,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 logger.info(f"Device: {device}")
 clip_model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32").to(device).eval()
 clip_processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
-text_model = SentenceTransformer('all-MiniLM-L6-v2', device='cpu')
+text_model = SentenceTransformer('all-MiniLM-L6-v2', device='GPU')
 logger.info("SentenceTransformer forced to CPU to avoid CUDA OOM")
 batch_size_img = 8
 batch_size_text = 64  
