@@ -7,9 +7,9 @@ from PIL import Image
 from tqdm import tqdm
 
 # Config
-images_dir = "../data/images"
-output_csv = "../data/master_images.csv"
-log_file = "../logs/image_cleaning.log"
+images_dir = "data/images"
+output_csv = "data/master_images.csv"
+log_file = "logs/image_cleaning.log"
 
 logging.basicConfig(
     level=logging.INFO,
