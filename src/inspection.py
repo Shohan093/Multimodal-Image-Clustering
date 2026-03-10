@@ -7,9 +7,9 @@ from collections import Counter
 from PIL import Image
 
 # Config
-exp_name = "exp4_all"       
-n_samples_per_cluster = 5             
-top_n_clusters = 10                  
+exp_name = "exp4_all"
+n_samples_per_cluster = 5
+top_n_clusters = 10
 
 # Paths (relative to your project root)
 master_csv     = "data/master_images.csv"
