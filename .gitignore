@@ -5,7 +5,6 @@ experiments/
 *.xlsx
 *.json
 *.jsonl
-*.txt
 
 # embeddings
 embeddings/

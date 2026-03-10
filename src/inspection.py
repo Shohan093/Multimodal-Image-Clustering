@@ -7,7 +7,8 @@ from collections import Counter
 from PIL import Image
 
 # Config
-exp_name = "exp4_all"
+exp_name = "exp_image_only"
+result_type = "kmeans"
 n_samples_per_cluster = 5
 top_n_clusters = 10
 
@@ -15,10 +16,10 @@ top_n_clusters = 10
 master_csv     = "data/master_images.csv"
 captions_file  = "data/captions.jsonl"
 exp_dir        = f"experiments/{exp_name}"
-labels_path    = os.path.join(exp_dir, "labels_hdbscan.npy")
+labels_path    = os.path.join(exp_dir, f"labels_{result_type}.npy")
 
 # Output folder
-output_root = os.path.join(exp_dir, "cluster_results")
+output_root = os.path.join(exp_dir, f"cluster_results_{result_type}")
 os.makedirs(output_root, exist_ok=True)
 
 print("Loading data...")
