@@ -185,6 +185,11 @@ for exp in experiments:
     fused = fuse_embeddings(exp["use_caption"], exp["use_ocr"])
     logger.info(f"Fused shape: {fused.shape}")
     
+    # Save fused embeddings
+    fused_path = os.path.join(output_base, exp_name, "fused.npy")
+    np.save(fused_path, fused)
+    logger.info(f"Saved fused embeddings to {fused_path}")
+    
     # UMAP
     X_red, X_2d = reduce_with_umap(fused)
     np.save(os.path.join(exp_dir, "umap_reduced.npy"), X_red)
