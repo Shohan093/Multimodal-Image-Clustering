@@ -13,10 +13,10 @@ import transformers
 transformers.logging.set_verbosity_error()
 
 # Config
-master_csv = "../data/master_images.csv"
-progress_file = "../data/caption_progress.txt"
-caption_file = "../data/captions.jsonl"
-log_file = "../logs/caption_generation.log"
+master_csv = "/data/master_images.csv"
+progress_file = "/data/caption_progress.txt"
+caption_file = "/data/captions.jsonl"
+log_file = "/logs/caption_generation.log"
 os.makedirs(os.path.dirname(log_file), exist_ok=True)
 
 # Model configuration

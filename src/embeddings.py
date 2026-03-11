@@ -11,17 +11,17 @@ from sentence_transformers import SentenceTransformer
 from transformers import CLIPProcessor, CLIPModel
 
 # Logging
-log_file = "../logs/embeddings.log"
+log_file = "/logs/embeddings.log"
 os.makedirs(os.path.dirname(log_file), exist_ok=True)
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s',
                     handlers=[logging.FileHandler(log_file), logging.StreamHandler()])
 logger = logging.getLogger(__name__)
 
 # Config
-master_csv = "../data/master_images.csv"
-ocr_json = "../data/ocr_results.json"
-captions_jsonl = "../data/captions.jsonl"
-output_dir = "../embeddings"
+master_csv = "/data/master_images.csv"
+ocr_json = "/data/ocr_results.json"
+captions_jsonl = "/data/captions.jsonl"
+output_dir = "/embeddings"
 os.makedirs(output_dir, exist_ok=True)
 
 
@@ -30,7 +30,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 logger.info(f"Device: {device}")
 clip_model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32").to(device).eval()
 clip_processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
-text_model = SentenceTransformer('all-MiniLM-L6-v2', device='GPU')
+text_model = SentenceTransformer('all-MiniLM-L6-v2', device='cuda')
 logger.info("SentenceTransformer forced to CPU to avoid CUDA OOM")
 batch_size_img = 8
 batch_size_text = 64  

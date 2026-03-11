@@ -7,7 +7,7 @@ from tqdm import tqdm
 
 import umap
 from hdbscan import HDBSCAN
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, normalize
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score, davies_bouldin_score, calinski_harabasz_score
 
@@ -15,16 +15,21 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Logging
-log_file = "../logs/clustering.log"
+log_file = "logs/clustering.log"
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s',
                     handlers=[logging.FileHandler(log_file), logging.StreamHandler()])
 logger = logging.getLogger(__name__)
 
 # Config
-embed_dir       = "../embeddings"
-master_csv      = "../data/master_images.csv"
-output_base     = "../experiments"
+embed_dir       = "embeddings"
+master_csv      = "data/master_images.csv"
+output_base     = "experiments"
 os.makedirs(output_base, exist_ok=True)
+
+# Modality weights
+w_image = 0.5
+w_caption = 0.25
+w_ocr = 0.25
 
 experiments = [
     {
@@ -73,17 +78,31 @@ n_samples = len(df_master)
 logger.info(f"Loaded {n_samples} samples")
 
 # Function to fuse embeddings
+# def fuse_embeddings(use_caption, use_ocr):
+#    vectors = [img_emb]
+#    if use_caption:
+#        vectors.append(cap_emb)
+#    if use_ocr:
+#        vectors.append(ocr_emb)
+#   
+#    fused = np.hstack(vectors)
+#    """scale if dimensions differ too much (rarely needed after L2 norm)"""
+#    # fused = StandardScaler().fit_transform(fused)
+#    return fused
+
 def fuse_embeddings(use_caption, use_ocr):
-    vectors = [img_emb]
-    if use_caption:
-        vectors.append(cap_emb)
-    if use_ocr:
-        vectors.append(ocr_emb)
-    
-    fused = np.hstack(vectors)
-    """scale if dimensions differ too much (rarely needed after L2 norm)"""
-    # fused = StandardScaler().fit_transform(fused)
-    return fused
+	vectors = []
+	vectors.append(w_image * img_emb) # image embeddings
+	
+	if use_caption: # use caption embeddings
+		vectors.append(w_caption * cap_emb)
+		
+	if use_ocr: # use ocr embeddings
+		vectors.append(w_ocr * ocr_emb)
+		
+	fused = np.hstack(vectors)
+	fused = normalize(fused)
+	return fused
 
 # UMAP reduction
 def reduce_with_umap(X):
@@ -185,6 +204,7 @@ for exp in experiments:
         json.dump(metrics_km, f, indent=2)
     save_umap_plot(X_2d, labels_km, exp_name, "kmeans")
     
+    logger.info(f"Weights → image:{w_image}, caption:{w_caption}, ocr:{w_ocr}")
     logger.info(f"{exp_name} finished. Metrics saved.")
 
 logger.info("All experiments completed.")

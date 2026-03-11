@@ -10,10 +10,10 @@ import cv2
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 # Config
-master_csv = "../data/master_images.csv"
-ocr_json_path = "../data/ocr_results.json"
-progress_file = "../data/ocr_progress.txt"
-log_file = "../logs/ocr_extraction.log"
+master_csv = "/data/master_images.csv"
+ocr_json_path = "/data/ocr_results.json"
+progress_file = "/data/ocr_progress.txt"
+log_file = "/logs/ocr_extraction.log"
 
 # Logging
 logging.basicConfig(
