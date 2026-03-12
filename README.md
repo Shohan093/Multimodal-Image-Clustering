@@ -103,7 +103,7 @@ Three types of embeddings are extracted.
 
 ---
 
-### 3. Multimodal Feature Fusion
+### 5. Multimodal Feature Fusion
 
 Embeddings from different modalities are combined using **weighted feature fusion**.
 
@@ -115,7 +115,7 @@ This weighting prioritizes visual information while still incorporating textual 
 
 ---
 
-### 4. Dimensionality Reduction
+### 6. Dimensionality Reduction
 
 High-dimensional embeddings are reduced using **UMAP** before clustering.
 
@@ -129,7 +129,7 @@ A separate **2D UMAP projection** is generated for visualization.
 
 ---
 
-### 5. Clustering Algorithms
+### 7. Clustering Algorithms
 
 Two clustering approaches are evaluated.
 
